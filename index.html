@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tower Tumble VR</title>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <script src="TumbleTower.js" defer></script>
+  <link rel="stylesheet" href="TumbleTower.css">
+</head>
+<body>
+  <div id="hud">
+    <div class="panel"><h1>TOWER TUMBLE VR</h1><div id="worldName"></div><div id="instructions">Pull a block out of the tower, then stack it on top.</div></div>
+    <div class="panel"><div id="score">Blocks stacked: <span id="moves">0</span></div><div style="font-size:12px;color:#d9e3e9">Tower height: <span id="remaining">18</span> levels</div><button id="reset" style="margin-top:8px">Restart this tower</button></div>
+  </div>
+  <div id="message"><h2 id="messageTitle">Tower tumbled!</h2><!--<p id="messageText">Nice try. Ready for another round?</p>--><button id="playAgain">Play again</button></div>
+  <!--<div id="hint">Desktop: click a block to pull it out, click it again to put it on top · WASD walks, drag looks · VR: pinch a block, pull it out, keep holding it and let go above the tower · Step into the portal to change world</div>-->
+  <div id="flash"></div>
+
+  <a-scene tower-game keep-out renderer="colorManagement: true; physicallyCorrectLights: true" background="color: #b8d0d6" shadow="type: pcfsoft" vr-mode-ui="enabled: true">
+
+    <!-- ================= WORLD 1: Garden ================= -->
+    <a-entity id="world-garden">
+      <a-entity light="type: ambient; intensity: 0.85; color: #fff1d6"></a-entity>
+      <a-entity light="type: directional; intensity: 1.8; castShadow: true" position="-3 7 4"></a-entity>
+      <a-entity light="type: directional; intensity: 0.7; color: #ffe9cc" position="4 5 -9"></a-entity>
+      <a-sky color="#b8d0d6"></a-sky>
+      <a-plane rotation="-90 0 0" width="30" height="30" color="#7b9b8e" position="0 0 0" shadow="receive: true"></a-plane>
+      <a-cylinder position="0 0.45 -3" radius="0.8" height="0.9" color="#5b4030" material="roughness: 0.75" shadow="cast: true; receive: true"></a-cylinder>
+      <a-cylinder position="0 0.93 -3" radius="0.76" height="0.08" color="#c59a6a" material="roughness: 0.65"></a-cylinder>
+      <a-entity id="tower-garden" position="0 0.98 -3"></a-entity>
+      <!-- portal to the Neon Night world (the portal builds its own ring / disc / label) -->
+      <a-entity portal="world: garden; target: neon; label: Neon Night; color: #F2F3F4; glow: #FF2BD6"
+                position="4.4 1.3 -1.6"></a-entity>
+    </a-entity>
+
+    <!-- ================= WORLD 2: Neon Night ================= -->
+    <a-entity id="world-neon" visible="false">
+      <a-entity light="type: ambient; intensity: 0.6; color: #8a6cff"></a-entity>
+      <a-entity light="type: directional; intensity: 1.2; color: #ff7ae6; castShadow: true" position="-3 7 4"></a-entity>
+      <a-entity light="type: directional; intensity: 0.8; color: #4de1ff" position="4 5 -9"></a-entity>
+      <a-sky color="#14062b"></a-sky>
+      <a-plane rotation="-90 0 0" width="30" height="30" color="#25104a" position="0 0 0" shadow="receive: true"></a-plane>
+      <a-cylinder position="0 0.45 -3" radius="0.8" height="0.9" color="#1a1030" material="roughness: 0.4; metalness: 0.5" shadow="cast: true; receive: true"></a-cylinder>
+      <a-cylinder position="0 0.93 -3" radius="0.76" height="0.08" color="#2b1a55" material="roughness: 0.3; metalness: 0.4"></a-cylinder>
+      <a-torus position="0 0.98 -3" rotation="90 0 0" radius="0.78" radius-tubular="0.015" color="#00E5FF" material="shader: flat"></a-torus>
+      <a-entity id="tower-neon" position="0 0.98 -3"></a-entity>
+      
+      <a-entity portal="world: neon; target: ice; label: Ice; color: #F2F3F4; glow: #000000"
+                position="-4.4 1.3 -1.6"></a-entity>
+    
+    </a-entity>
+
+     <!-- ================= WORLD 3: Ice World ================= -->
+    <a-entity id="world-ice" visible="false">
+      <a-entity light="type: ambient; intensity: 0.6; color: #D6FFFA"></a-entity>
+      <a-entity light="type: directional; intensity: 1.2; color: #D6FFFA; castShadow: true" position="-3 7 4"></a-entity>
+      <a-entity light="type: directional; intensity: 0.8; color: #D6FFFA" position="4 5 -9"></a-entity>
+      <a-sky color="#D6FFFA"></a-sky>
+      <a-plane rotation="-90 0 0" width="30" height="30" color="#D6FFFA" position="0 0 0" shadow="receive: true"></a-plane>
+      <a-cylinder position="0 0.45 -3" radius="0.8" height="0.9" color="#1a1030" material="roughness: 0.4; metalness: 0.5" shadow="cast: true; receive: true"></a-cylinder>
+      <a-cylinder position="0 0.93 -3" radius="0.76" height="0.08" color="#2b1a55" material="roughness: 0.3; metalness: 0.4"></a-cylinder>
+      <a-torus position="0 0.98 -3" rotation="90 0 0" radius="0.78" radius-tubular="0.015" color="#00E5FF" material="shader: flat"></a-torus>
+      <a-entity id="tower-ice" position="0 0.98 -3"></a-entity>
+      
+      <a-entity portal="world: ice; target: neon; label: Neon; color: #F2F3F4; glow: #000000"
+                position="-4.4 1.3 1.6" rotation="0 50 0"></a-entity>
+    </a-entity>
+
+    <!-- Mouse picking: click the block / portal under the pointer -->
+    <a-entity id="mouse" cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .block, .portal-element; far: 30"></a-entity>
+
+    <!-- Everything the player carries lives inside the rig, so moving the rig moves it all -->
+    <a-entity id="rig" position="0 0 0.4">
+      <a-entity id="cam" camera position="0 1.65 0" look-controls="pointerLockEnabled: false" wasd-controls="acceleration: 35"></a-entity>
+      <a-entity id="leftHand" hand-tracking-controls="hand: left; modelStyle: mesh" pinch-grab></a-entity>
+      <a-entity id="rightHand" hand-tracking-controls="hand: right; modelStyle: mesh" pinch-grab></a-entity>
+      <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
+      <a-entity id="rightController" oculus-touch-controls="hand: right"></a-entity>
+    </a-entity>
+  </a-scene>
+</body>
+</html>
