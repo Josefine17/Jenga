@@ -1,0 +1,18 @@
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: #101820; color: #fff; }
+    #hud { position: fixed; z-index: 5; top: 14px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; pointer-events: none; }
+    .panel { background: rgba(12, 20, 27, .82); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 12px 15px; backdrop-filter: blur(8px); box-shadow: 0 8px 24px #0003; }
+    h1 { font-size: 18px; margin: 0 0 4px; letter-spacing: .04em; }
+    #worldName { font-size: 13px; font-weight: 700; color: #f2c078; margin-bottom: 4px; }
+    #instructions { max-width: 350px; font-size: 13px; line-height: 1.4; color: #d9e3e9; }
+    #score { font-weight: 750; font-size: 17px; white-space: nowrap; }
+    #message { position: fixed; z-index: 6; top: 50%; left: 50%; transform: translate(-50%,-50%); padding: 20px 24px; max-width: min(90vw, 420px); text-align: center; border-radius: 18px; background: rgba(12,20,27,.92); border: 1px solid #ffffff40; box-shadow: 0 12px 40px #0006; display: none; }
+    #message h2 { margin: 0 0 8px; }
+    #message p { margin: 0 0 15px; color: #d9e3e9; }
+    button { pointer-events: auto; cursor: pointer; color: #102027; background: #f2c078; border: 0; border-radius: 10px; padding: 10px 16px; font-weight: 750; }
+    #reset { pointer-events: auto; }
+    #hint { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; font-size: 12px; color: #e8edf0; background: #101820bd; padding: 8px 12px; border-radius: 999px; max-width: 94vw; white-space: nowrap; }
+    #flash { position: fixed; inset: 0; z-index: 7; background: #fff; opacity: 0; pointer-events: none; transition: opacity .7s ease-out; }
+    @media (max-width: 600px) { #instructions { display: none; } h1 { font-size: 15px; } .panel { padding: 10px 12px; } #hint { white-space: normal; width: max-content; max-width: 92vw; } }
+ 
